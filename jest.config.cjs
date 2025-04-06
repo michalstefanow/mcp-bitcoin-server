@@ -1,7 +1,8 @@
 /** @type {import('ts-jest').JestConfigWithTsJest} */
 module.exports = {
-  // Use the ESM preset for ts-jest
+  // Restore the ESM preset
   preset: 'ts-jest/presets/default-esm',
+  // extensionsToTreatAsEsm: ['.ts'], // Handled by preset
   testEnvironment: 'node',
   // Automatically clear mock calls, instances, contexts and results before every test
   clearMocks: true,
@@ -34,20 +35,27 @@ module.exports = {
     "**/tests/**/*.test.ts",
     "**/src/**/*.test.ts"
   ],
+  // transform: { ... }, // Handled by preset
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
-  // Keep node_modules transform ignore pattern
+  // Keep node_modules transform ignore pattern (preset might handle this too, but explicit is safer)
   transformIgnorePatterns: [
     "/node_modules/",
     "\\.pnp\\.[^\\/]+$"
   ],
-  // The preset handles the transform, no need to specify it here
-  // The preset handles ESM extensions
   moduleNameMapper: {
+    // Explicitly map 'keytar' to its mock file
+    '^keytar$': '<rootDir>/tests/__mocks__/keytar.ts',
+    // Explicitly map 'bitcoinjs-lib' to its mock file
+    '^bitcoinjs-lib$': '<rootDir>/tests/__mocks__/bitcoinjs-lib.ts',
+    // Explicitly map 'ecpair' to its mock file
+    '^ecpair$': '<rootDir>/tests/__mocks__/ecpair.ts',
+    // Explicitly map 'tiny-secp256k1' to its mock file
+    '^tiny-secp256k1$': '<rootDir>/tests/__mocks__/tiny-secp256k1.ts',
     // Handle module paths starting with '#' as defined in tsconfig.json
-    // Must map the path alias for ESM
+    // Must map the path alias for ESM (adjust if your alias differs)
     '^#/(.*)$': '<rootDir>/src/$1',
-    // Force module resolution for NodeNext compatibility
-    '^(\\.{1,2}/.*)\\.js$': '$1',
+    // Removed NodeNext .js mapping as it might conflict with ts-jest ESM transform
+    // '^(\\.{1,2}/.*)\\.js$': '$1',
   },
   // Indicates whether each individual test should be reported during the run
   verbose: true,

@@ -28,14 +28,20 @@ The basic project structure, dependencies, configuration, and dummy tool interfa
 
 ### Testing Setup
 - [x] Set up testing framework: Jest with ts-jest (`jest.config.cjs`). Basic example test passes.
+- [x] Installed `keytar` dependency.
+- [x] Created Jest mock for `keytar` (`tests/__mocks__/keytar.ts`) and verified (`tests/unit/keytar-mock.test.ts`).
+- [x] Installed `bitcoinjs-lib` dependency.
+- [x] Created Jest mock for `bitcoinjs-lib` (`tests/__mocks__/bitcoinjs-lib.ts`) and verified (`tests/unit/bitcoinjs-lib-mock.test.ts`).
+- [x] Installed `ecpair` and `tiny-secp256k1` dependencies.
+- [x] Created Jest mocks for `ecpair` and `tiny-secp256k1` and verified (`tests/unit/ecpair-mock.test.ts`, `tests/unit/tiny-secp256k1-mock.test.ts`).
+- [x] Finalized Jest/ESM configuration (`tsconfig.json`, `package.json`, `jest.config.cjs`) and verified with `pnpm test`.
 
 ## Pending Work (Next Steps)
 
 ### Core Functionality - Key Management & `get_address`
-- [ ] Select and install Bitcoin library (e.g., `bitcoinjs-lib`).
-- [ ] Implement key generation logic (`src/wallet/key.ts`).
+- [ ] Implement key generation logic (`src/wallet/key.ts`) using installed `ecpair` and `tiny-secp256k1`.
 - [ ] Implement encryption/decryption utilities (`src/utils/crypto.ts`).
-- [ ] Select, install, and implement keychain storage (`src/storage/keychain.ts`, e.g., `node-keytar`).
+- [ ] Implement keychain storage using installed `keytar` (`src/storage/keychain.ts`).
 - [ ] Integrate key generation, encryption, and storage on first run.
 - [ ] Implement address generation (`src/wallet/address.ts`).
 - [ ] Implement the actual logic for the `get_address` tool (`src/tools/get-address.ts`) using the implemented key/address management.
@@ -53,7 +59,8 @@ The basic project structure, dependencies, configuration, and dummy tool interfa
 ## Known Issues
 - All tool implementations (`get_address`, `get_balance`, `send_transaction`) currently return static, dummy data.
 - No Bitcoin wallet logic (key management, transactions, network interaction) is implemented.
-- Required libraries for Bitcoin operations and keychain access are not yet installed.
+- Keychain library (`keytar`) is installed but not yet implemented in `src/storage/keychain.ts`.
+- Bitcoin libraries (`bitcoinjs-lib`, `ecpair`, `tiny-secp256k1`) are installed but not yet used in application code.
 
 ## Blockers
 - None currently. Need to select and evaluate libraries for keychain and SPV/P2P.

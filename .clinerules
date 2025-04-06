@@ -64,6 +64,14 @@ This file captures important patterns, preferences, and project intelligence for
 - Integration tests for Bitcoin operations
 - Use testnet for live transaction testing
 - Implement security-focused tests
+- **Verification**: ALWAYS run `pnpm test` after installing dependencies, updating configurations (tsconfig, jest config), or implementing features. Do NOT consider a task complete until all tests pass. Configuration interactions can be complex and require validation.
+
+### Jest/ESM Configuration Notes (Learned July 4, 2025)
+- **Context**: Project uses TypeScript, `type: "module"`, `module: NodeNext`, `isolatedModules: true`.
+- **Requirement**: Running Jest requires the `NODE_OPTIONS=--experimental-vm-modules` flag in the `test` script (`package.json`).
+- **Requirement**: Jest globals (`jest`, `describe`, `it`, etc.) must be explicitly imported from `@jest/globals` in both test files (`*.test.ts`) and manual mock files (`__mocks__/*.ts`) when using ESM configuration. Install `@jest/globals` as a dev dependency (`pnpm add -D @jest/globals`).
+- **Requirement**: When mocking modules with native bindings (like `keytar`), explicitly map the module to its mock file using `moduleNameMapper` in `jest.config.cjs` (e.g., `'^keytar$': '<rootDir>/tests/__mocks__/keytar.ts'`).
+- **Configuration**: Use the `ts-jest/presets/default-esm` preset in `jest.config.cjs`. Avoid conflicting `moduleNameMapper` rules (like removing `.js` extensions) if they interfere with `ts-jest`'s ESM handling.
 
 ## Project Evolution
 
@@ -79,7 +87,8 @@ The project will likely evolve through these phases:
 
 - **Package Manager**: `pnpm` is the required package manager.
 - **Dependency Management**: All dependencies MUST be added/removed using `pnpm` commands (`pnpm add`, `pnpm remove`). Direct editing of `package.json` for dependencies is forbidden.
-- **Script Management**: Scripts in `package.json` should preferably be managed using `pnpm pkg set scripts.<script_name>="<command>"`.
+- **Script Management**: Scripts in `package.json` should preferably be managed using `pnpm pkg set scripts.<script_name>="<command>"`. (Note: Adding `NODE_OPTIONS` required manual edit for clarity).
+- **Test Verification**: **CRITICAL:** Always run `pnpm test` after changes. Do not assume success based on code/config edits alone. Confirm with passing tests before proceeding or completing a task.
 
 ## Critical Implementation Paths
 
