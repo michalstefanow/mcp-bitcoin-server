@@ -11,7 +11,8 @@
 - **pnpm**: **Required** package manager. All dependency and script management MUST use `pnpm` commands (e.g., `pnpm add`, `pnpm pkg set`). Direct editing of `package.json` is forbidden.
 - **fastmcp**: MCP server framework used for this project.
 - **zod**: Schema definition and validation library.
-- **Jest/Mocha**: Unit and integration testing (TBD).
+- **Jest**: Unit and integration testing framework (configured with `ts-jest`).
+- **ts-jest**: Jest transformer for TypeScript.
 - **ESLint/Prettier**: Code quality and formatting (TBD).
 - **TypeDoc**: API documentation generation (TBD).
 
@@ -59,8 +60,8 @@ server.start({
 - **Planned Approach:** Encrypted private key in OS keychain (via `node-keytar` or similar); local storage for SPV state (headers, UTXOs).
 
 ## Testing Strategy
-- **Status:** Not yet implemented.
-- **Plan:** Use Jest/Mocha for unit and integration tests. Testnet testing planned for later phases. See `tests/README.md`.
+- **Status:** Jest framework configured (`jest.config.cjs`, `ts-jest`). Basic example test passes.
+- **Plan:** Use Jest for unit and integration tests. Write tests for core functionality (key management, address generation, etc.). Testnet testing planned for later phases. See `tests/README.md`.
 
 ## Development Environment
 

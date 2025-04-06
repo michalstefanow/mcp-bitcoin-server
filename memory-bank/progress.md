@@ -26,6 +26,9 @@ The basic project structure, dependencies, configuration, and dummy tool interfa
 - [x] Updated `.clinerules` to enforce `pnpm` usage.
 - [x] **Revised Memory Bank (Current Task):** Updated all memory bank files to accurately reflect the current scaffolded state, removing future/planned features not yet implemented.
 
+### Testing Setup
+- [x] Set up testing framework: Jest with ts-jest (`jest.config.cjs`). Basic example test passes.
+
 ## Pending Work (Next Steps)
 
 ### Core Functionality - Key Management & `get_address`
@@ -45,7 +48,6 @@ The basic project structure, dependencies, configuration, and dummy tool interfa
 - [ ] Implement `send_transaction` tool logic.
 
 ### Testing
-- [ ] Set up testing framework (e.g., Jest).
 - [ ] Write unit tests for key management & address generation.
 
 ## Known Issues

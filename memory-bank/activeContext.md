@@ -7,6 +7,7 @@ The project consists of a basic scaffold created using `fastmcp`. Dummy implemen
 - **Scaffolding:** Initialized project, installed dependencies (`fastmcp`, `zod`, TypeScript), configured build/run scripts via `pnpm`, created directory structure (`src`, `tests`), implemented basic `fastmcp` server, added dummy tools, types, config.
 - **Refinement:** Renamed server logic file, updated imports, added placeholder files to preserve structure.
 - **Documentation:** Updated `.clinerules` and memory bank files (`projectbrief`, `productContext`, `systemPatterns`, `techContext`, `progress`, `activeContext`) to reflect current state and enforce `pnpm` usage.
+- **Testing Setup:** Installed and configured Jest (`jest`, `@types/jest`, `ts-jest`) with `jest.config.cjs`. Added example test (`tests/unit/example.test.ts`) and verified setup with `pnpm test`.
 
 ## Next Steps
 
@@ -29,7 +30,7 @@ The project consists of a basic scaffold created using `fastmcp`. Dummy implemen
 3.  Implement `get_balance` tool using real data.
 4.  Implement transaction creation/signing/broadcasting.
 5.  Implement `send_transaction` tool using real data.
-6.  Set up testing framework and write initial tests.
+6.  Write initial unit tests for key management and address generation using the configured Jest framework.
 
 ## Active Decisions
 - **Wallet Type**: Simple SPV wallet, single private key, encrypted in OS keychain.
@@ -53,8 +54,9 @@ The project consists of a basic scaffold created using `fastmcp`. Dummy implemen
 - `fastmcp` server with dummy tools.
 - `zod` for schemas.
 - Basic project structure with placeholders.
-- `package.json` scripts: `build`, `start`, `dev`, `inspect`.
-- `tests/` directory exists but is empty.
+- `package.json` scripts: `build`, `start`, `dev`, `inspect`, `test`.
+- `tests/` directory contains `README.md` and `unit/example.test.ts`.
+- Jest configured via `jest.config.cjs`.
 
 ## Current Constraints
 - No actual wallet functionality implemented.
@@ -63,5 +65,5 @@ The project consists of a basic scaffold created using `fastmcp`. Dummy implemen
 - `WALLET_PASSWORD` environment variable required for planned key encryption.
 
 ## Communication Notes
-- Memory bank now accurately reflects the scaffolded state.
-- Next step is implementing core key management and the `get_address` tool logic.
+- Memory bank now accurately reflects the scaffolded state, including the Jest setup.
+- Next step is implementing core key management and the `get_address` tool logic, followed by writing tests for it.
