@@ -3,39 +3,42 @@
 ## Problem Statement
 As AI systems become more capable and autonomous, they increasingly need to interact with financial systems, particularly cryptocurrencies like Bitcoin. However, there's currently a gap in how AI agents can securely and standardly access Bitcoin functionality. This project addresses that gap by providing a Model Context Protocol (MCP) server specifically designed for Bitcoin wallet operations.
 
-## Use Cases
+## Use Cases (Long-Term Vision)
+
+*(Note: The following use cases describe the intended long-term functionality. The current implementation only provides dummy interfaces.)*
 
 ### AI Agent as a Service Provider
-- An AI agent offering services (content creation, analysis, coding) can receive Bitcoin payments directly
-- Payment verification can trigger service delivery automatically
-- Transaction history provides a verifiable record of service provision
+- An AI agent offering services (content creation, analysis, coding) could receive Bitcoin payments directly.
+- Payment verification could trigger service delivery automatically.
+- Transaction history could provide a verifiable record of service provision.
 
 ### AI-Managed Financial Operations
-- AI systems can monitor and manage Bitcoin holdings
-- Automated transfers based on predefined conditions or triggers
-- Portfolio management and threshold-based transactions
+- AI systems could monitor and manage Bitcoin holdings.
+- Automated transfers could be based on predefined conditions or triggers.
+- Portfolio management and threshold-based transactions could be enabled.
 
 ### Cross-System Value Transfer
-- AI agents can transfer value between different systems or platforms
-- Enable microtransactions for granular service billing
-- Support for tipping or rewarding other AI or human contributors
+- AI agents could transfer value between different systems or platforms.
+- Microtransactions could be enabled for granular service billing.
+- Support for tipping or rewarding other AI or human contributors could be added.
 
-## Key Functionality
+## Key Functionality (Current State: Dummy Interfaces)
 
-### Wallet Management
-- Creation of new Bitcoin wallets with proper key security
-- Management of multiple wallets for different purposes or users
-- Recovery mechanisms for wallet backup and restoration
+The server currently exposes the following tool interfaces with placeholder (dummy) implementations:
 
-### Transaction Handling
-- Sending Bitcoin to any valid address
-- Transaction fee estimation and management
-- Transaction status monitoring and confirmation tracking
+### Wallet Address (`get_address` tool)
+- **Intention:** Provide a Bitcoin address for receiving payments.
+- **Current State:** Returns a hardcoded testnet address. Does not involve real key management or address generation.
 
-### Balance and History
-- Real-time balance checking across wallets
-- Transaction history retrieval and filtering
-- Address monitoring for incoming payments
+### Transaction Sending (`send_transaction` tool)
+- **Intention:** Send Bitcoin to a specified address.
+- **Current State:** Accepts address and amount parameters, performs basic validation via schema, and returns a hardcoded dummy transaction ID. Does not perform balance checks, signing, or broadcasting.
+
+### Balance Checking (`get_balance` tool)
+- **Intention:** Check the current wallet balance.
+- **Current State:** Returns a hardcoded dummy balance. Does not query the network or track UTXOs.
+
+*(Note: Features like wallet creation/management, key recovery, fee estimation, transaction history, etc., are not yet implemented or exposed as tools.)*
 
 ## User Experience Goals
 
@@ -51,21 +54,19 @@ As AI systems become more capable and autonomous, they increasingly need to inte
 - Clear feedback on transaction status
 - Appropriate levels of transaction control
 
-## Constraints and Considerations
+## Constraints and Considerations (Future Implementation)
+
+*(Note: These apply to the planned future implementation, not the current scaffold.)*
 
 ### Security
-- Private key protection is paramount
-- All communications must be encrypted
-- Authorization mechanisms to prevent unauthorized access
-- Audit logging for all critical operations
+- Private key protection will be paramount (planned: encryption + keychain).
+- Secure communication channels (handled by MCP transport).
+- Authorization will rely on the client environment.
+- Audit logging needs to be designed.
 
 ### Regulatory
-- The server should support compliance with relevant regulations
-- Transaction monitoring and reporting capabilities
-- Design should accommodate future regulatory requirements
+- Compliance considerations will be addressed during implementation.
 
 ### Technical
-- Performance requirements for real-time operations
-- Scalability for handling multiple concurrent requests
-- Reliability requirements, especially for financial transactions
-- Compatibility with both testnet and mainnet environments
+- Performance, scalability, and reliability will be key factors during SPV/wallet implementation.
+- Compatibility with testnet and mainnet will be configurable.

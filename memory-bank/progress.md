@@ -1,85 +1,60 @@
 # Progress Tracker: Bitcoin Wallet MCP Server
 
-## Project Status: Scaffolding Complete
+## Project Status: Scaffolded
 
-The initial project scaffolding is complete. The basic structure, dependencies, and dummy tool implementations are in place. The project is ready for core wallet logic implementation.
+The basic project structure, dependencies, configuration, and dummy tool interfaces are set up. The project accurately reflects the initial scaffold state.
 
 ## Completed Work
 
-### Project Setup
-- [x] Created initial repository structure
-- [x] Set up project with MIT license
-- [x] Established README with basic project description
-- [x] Created memory bank for project documentation and context
-- [x] Initialized project with `pnpm`
-- [x] Installed core dependencies (`fastmcp`, `zod`)
-- [x] Installed development dependencies (`typescript`, `@types/node`, `ts-node`)
-- [x] Configured `tsconfig.json`
-- [x] Configured `package.json` (type: module, scripts: build, start, dev, inspect)
-- [x] Created project directory structure (`src`, `tests`)
-- [x] Implemented basic MCP server (`src/server/server.ts`)
-- [x] Implemented dummy tools (`get_address`, `get_balance`, `send_transaction`)
-- [x] Defined basic types (`src/types/index.ts`)
-- [x] Created basic configuration (`src/config/index.ts`)
-- [x] Created main entry point (`src/index.ts`)
-- [x] Added `README.md`
+### Project Setup & Scaffolding
+- [x] Created initial repository structure & license.
+- [x] Initialized project with `pnpm`.
+- [x] Installed dependencies: `fastmcp`, `zod`, `typescript`, `@types/node`, `ts-node`.
+- [x] Configured `tsconfig.json` (ES2022, NodeNext modules, paths).
+- [x] Configured `package.json` (type: module, scripts: build, start, dev, inspect).
+- [x] Created project directory structure (`src`, `tests`) with placeholder files.
+- [x] Implemented basic MCP server (`src/server/server.ts`) using `fastmcp`.
+- [x] Implemented dummy tools (`get_address`, `get_balance`, `send_transaction`) in `src/tools/`.
+- [x] Defined basic types (`src/types/index.ts`) using `zod`.
+- [x] Created basic configuration (`src/config/index.ts`).
+- [x] Created main entry point (`src/index.ts`).
+- [x] Added basic `README.md`.
+- [x] Added `tests/README.md` outlining test strategy.
 
-### Documentation
-- [x] Defined project brief with core goals and success criteria
-- [x] Documented product context and use cases
-- [x] Outlined system architecture and patterns
-- [x] Specified technical context and potential technologies
-- [x] Established active context and next steps
-- [x] Updated `activeContext.md` with current status
-- [x] Updated `progress.md` (this file)
+### Documentation & Rules
+- [x] Created initial memory bank (`projectbrief.md`, `productContext.md`, `systemPatterns.md`, `techContext.md`, `activeContext.md`, `progress.md`).
+- [x] Updated `.clinerules` to enforce `pnpm` usage.
+- [x] **Revised Memory Bank (Current Task):** Updated all memory bank files to accurately reflect the current scaffolded state, removing future/planned features not yet implemented.
 
-## In Progress Work
+## Pending Work (Next Steps)
 
-- [ ] Evaluating specific libraries for SPV, P2P, and Keychain access.
+### Core Functionality - Key Management & `get_address`
+- [ ] Select and install Bitcoin library (e.g., `bitcoinjs-lib`).
+- [ ] Implement key generation logic (`src/wallet/key.ts`).
+- [ ] Implement encryption/decryption utilities (`src/utils/crypto.ts`).
+- [ ] Select, install, and implement keychain storage (`src/storage/keychain.ts`, e.g., `node-keytar`).
+- [ ] Integrate key generation, encryption, and storage on first run.
+- [ ] Implement address generation (`src/wallet/address.ts`).
+- [ ] Implement the actual logic for the `get_address` tool (`src/tools/get-address.ts`) using the implemented key/address management.
 
-## Pending Work
-
-### Core Functionality (Real Implementation)
-- [ ] Implement Key Management (generation, encryption, keychain storage/retrieval)
-- [ ] Implement Address Generation
-- [ ] Implement SPV Client (block headers, peer connection)
-- [ ] Implement UTXO Tracking (via SPV)
-- [ ] Implement `get_balance` tool logic
-- [ ] Implement Transaction Creation & Signing
-- [ ] Implement Transaction Broadcasting
-- [ ] Implement `send_transaction` tool logic
-- [ ] Implement `get_address` tool logic
-
-### Security Implementation
-- [ ] Finalize key encryption details
-- [ ] Implement robust keychain interaction
-- [ ] Add input validation beyond basic schema checks
+### Subsequent Functionality
+- [ ] Implement SPV Client & UTXO Tracking.
+- [ ] Implement `get_balance` tool logic.
+- [ ] Implement Transaction Creation & Signing.
+- [ ] Implement Transaction Broadcasting.
+- [ ] Implement `send_transaction` tool logic.
 
 ### Testing
-- [ ] Set up testing framework (e.g., Jest)
-- [ ] Write unit tests for key management and wallet logic
-- [ ] Write integration tests for tool execution
-- [ ] Plan for testnet transaction testing
-
-### Documentation
-- [ ] Refine `README.md` as features are added
-- [ ] Document specific library choices and rationale
-- [ ] Add detailed API documentation for tools
-- [ ] Create integration guide examples
-- [ ] Document security practices in detail
+- [ ] Set up testing framework (e.g., Jest).
+- [ ] Write unit tests for key management & address generation.
 
 ## Known Issues
-
-- Dummy tool implementations return static data.
-- No actual Bitcoin wallet functionality exists yet.
-- Keychain interaction and SPV logic are not implemented.
+- All tool implementations (`get_address`, `get_balance`, `send_transaction`) currently return static, dummy data.
+- No Bitcoin wallet logic (key management, transactions, network interaction) is implemented.
+- Required libraries for Bitcoin operations and keychain access are not yet installed.
 
 ## Blockers
-
-No current blockers.
+- None currently. Need to select and evaluate libraries for keychain and SPV/P2P.
 
 ## Notes
-
-- Project is in very early stages with focus on establishing the core architecture
-- All functionality is currently in planning phase, not implementation
-- Security considerations must be addressed at every step of development
+- The project is now accurately documented to reflect its current state: a functional scaffold ready for core logic implementation.

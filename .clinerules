@@ -41,11 +41,15 @@ This file captures important patterns, preferences, and project intelligence for
 
 ## Development Workflow
 
+### Package Management
+- **Strictly use `pnpm` for all package management tasks.**
+- **NEVER edit `package.json` directly.** Use `pnpm add`, `pnpm remove`, or `pnpm pkg set` commands to manage dependencies and scripts.
+
 ### Setting Up Development Environment
-1. Install Node.js and npm/yarn
-2. Install TypeScript and development dependencies
-3. Configure ESLint and Prettier
-4. Set up testing framework
+1. Install Node.js and `pnpm` globally (`npm install -g pnpm` or follow official pnpm install guide).
+2. Run `pnpm install` to install project dependencies.
+3. Configure editor for TypeScript, ESLint, Prettier (if used).
+4. Set up testing framework (TBD).
 
 ### Implementation Flow
 1. Start with basic MCP server implementation
@@ -71,9 +75,11 @@ The project will likely evolve through these phases:
 5. Performance optimizations
 6. Additional cryptocurrency support (potential future extension)
 
-## User Preferences
+## User Preferences / Project Rules
 
-To be discovered and documented as the project progresses.
+- **Package Manager**: `pnpm` is the required package manager.
+- **Dependency Management**: All dependencies MUST be added/removed using `pnpm` commands (`pnpm add`, `pnpm remove`). Direct editing of `package.json` for dependencies is forbidden.
+- **Script Management**: Scripts in `package.json` should preferably be managed using `pnpm pkg set scripts.<script_name>="<command>"`.
 
 ## Critical Implementation Paths
 

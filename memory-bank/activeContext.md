@@ -1,74 +1,67 @@
 # Active Context: Bitcoin Wallet MCP Server
 
 ## Current Focus
-The project has completed the initial scaffolding phase using `fastmcp`. The basic structure is in place, including dummy implementations for the core tools (`get_address`, `get_balance`, `send_transaction`). The focus is now shifting towards implementing the actual Bitcoin wallet logic.
+The project consists of a basic scaffold created using `fastmcp`. Dummy implementations exist for the `get_address`, `get_balance`, and `send_transaction` tools. The immediate focus is on implementing the first real piece of wallet functionality: key generation and secure storage.
 
 ## Recent Changes
-- Initialized project using `pnpm`.
-- Installed `fastmcp`, `zod`, and TypeScript dependencies.
-- Configured `tsconfig.json` and `package.json` scripts.
-- Created the project directory structure (`src`, `tests`).
-- Implemented the basic MCP server using `fastmcp`.
-- Added dummy implementations for `get_address`, `get_balance`, and `send_transaction` tools.
-- Defined basic types and configuration.
-- Refined file structure (renamed server logic file, updated imports).
-- Added `README.md`.
+- **Scaffolding:** Initialized project, installed dependencies (`fastmcp`, `zod`, TypeScript), configured build/run scripts via `pnpm`, created directory structure (`src`, `tests`), implemented basic `fastmcp` server, added dummy tools, types, config.
+- **Refinement:** Renamed server logic file, updated imports, added placeholder files to preserve structure.
+- **Documentation:** Updated `.clinerules` and memory bank files (`projectbrief`, `productContext`, `systemPatterns`, `techContext`, `progress`, `activeContext`) to reflect current state and enforce `pnpm` usage.
 
 ## Next Steps
 
 ### Immediate Tasks
-1. Implement wallet key management:
-   - Generate single private key on first run.
-   - Encrypt key using `WALLET_PASSWORD`.
-   - Store encrypted key in OS keychain (`node-keytar`).
-   - Implement key retrieval and decryption.
-2. Implement address generation from the public key.
-3. Begin SPV client implementation (`src/wallet/spv.ts`):
-   - Connect to Bitcoin peers.
-   - Download block headers.
+1.  **Implement Key Generation:**
+    *   In `src/wallet/key.ts`, add logic to generate a single Bitcoin private key if one doesn't exist (checking via keychain).
+    *   Select and install a suitable Bitcoin library (e.g., `bitcoinjs-lib` via `pnpm add bitcoinjs-lib`).
+2.  **Implement Key Encryption:**
+    *   In `src/utils/crypto.ts`, implement AES-256-GCM encryption/decryption using the `WALLET_PASSWORD` from `src/config/index.ts`.
+3.  **Implement Keychain Storage:**
+    *   In `src/storage/keychain.ts`, add logic to store/retrieve the *encrypted* key using `node-keytar` (install via `pnpm add node-keytar`). Handle potential platform issues.
+4.  **Integrate Key Management:**
+    *   Update `src/wallet/key.ts` to use the crypto and keychain modules for storing the key on first run and retrieving/decrypting it when needed (initially for `get_address`).
+5.  **Implement `get_address` Tool:**
+    *   Modify `src/tools/get-address.ts` to use the `KeyManager` and `AddressManager` (which needs basic implementation in `src/wallet/address.ts`) to derive and return the actual wallet address.
 
-### Short-term Roadmap
-1. Implement UTXO tracking based on SPV.
-2. Implement `get_balance` using tracked UTXOs.
-3. Implement transaction creation and signing using the private key.
-4. Implement transaction broadcasting via the network provider interface.
-5. Replace dummy tool implementations with real logic.
-6. Develop comprehensive testing suite.
+### Short-term Roadmap (Post Key Management)
+1.  Implement SPV client basics (peer connection, header download).
+2.  Implement UTXO tracking via SPV.
+3.  Implement `get_balance` tool using real data.
+4.  Implement transaction creation/signing/broadcasting.
+5.  Implement `send_transaction` tool using real data.
+6.  Set up testing framework and write initial tests.
 
 ## Active Decisions
-
-### Architecture Decisions
-- **Wallet Type**: Confirmed as a simple SPV wallet with a single, encrypted private key stored in the OS keychain. Avoid HD wallets for simplicity.
-- **Stateless Readiness**: Architecture designed with a `NetworkProvider` interface to allow swapping between stateful (SPV) and stateless (API) backends in the future. Initial implementation uses SPV.
-- **Import Strategy**: Decided against using barrel files; imports point directly to specific files.
-
-### Technical Decisions
-- **Package Manager**: `pnpm`.
+- **Wallet Type**: Simple SPV wallet, single private key, encrypted in OS keychain.
+- **Stateless Readiness**: Architecture uses a `NetworkProvider` interface (implementation TBD).
+- **Package Manager**: `pnpm` (strict enforcement).
 - **MCP Framework**: `fastmcp`.
 - **Schema Validation**: `zod`.
-- **Keychain Access**: Plan to use `node-keytar`.
-- **Bitcoin Library**: Likely `bitcoinjs-lib` (needs confirmation during implementation).
-- **SPV Library**: Potential candidates include `bitcoin-spv` and `bitcoin-p2p` (needs evaluation).
+
+### Technical Decisions (Pending / To Be Confirmed)
+- **Keychain Access**: `node-keytar` (needs installation and testing).
+- **Bitcoin Library**: `bitcoinjs-lib` (needs installation and use).
+- **SPV/P2P Library**: Evaluation needed.
 
 ### Open Questions
-- Which specific SPV/P2P libraries are most suitable and well-maintained?
-- How to best manage the SPV client's state (block headers, UTXOs) persistence?
-- What are the specific requirements for OS keychain integration (`node-keytar`)?
-- How to handle network errors and peer disconnections gracefully in the SPV client?
+- Reliability and platform compatibility of `node-keytar`.
+- Best library choice for SPV/P2P functionality.
+- Persistent storage mechanism for SPV state (headers, UTXOs).
 
 ## Development Environment
-- Node.js/TypeScript setup using `pnpm`.
-- `fastmcp` for MCP server implementation.
-- `zod` for schema validation.
-- `tsconfig.json` configured for ES2022 and NodeNext modules.
-- `package.json` includes `build`, `start`, `dev`, `inspect` scripts.
-- `tests/` directory created for future tests.
+- Node.js/TypeScript (`es2022`, `NodeNext`) using `pnpm`.
+- `fastmcp` server with dummy tools.
+- `zod` for schemas.
+- Basic project structure with placeholders.
+- `package.json` scripts: `build`, `start`, `dev`, `inspect`.
+- `tests/` directory exists but is empty.
 
 ## Current Constraints
-- SPV implementation requires careful handling of peer connections and state.
-- Keychain integration might have platform-specific dependencies or requirements.
-- Need `WALLET_PASSWORD` environment variable set to run.
+- No actual wallet functionality implemented.
+- Keychain integration is pending and might have dependencies.
+- SPV implementation is complex and pending.
+- `WALLET_PASSWORD` environment variable required for planned key encryption.
 
 ## Communication Notes
-- Scaffolding complete, ready to implement core wallet logic.
-- Security (key encryption, keychain storage) is a critical next step.
+- Memory bank now accurately reflects the scaffolded state.
+- Next step is implementing core key management and the `get_address` tool logic.
