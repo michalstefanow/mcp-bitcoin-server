@@ -55,3 +55,7 @@ This is a simple SPV (Simplified Payment Verification) Bitcoin wallet that:
 - The private key is stored encrypted in the OS keychain
 - Never logs sensitive information like private keys or mnemonics
 - All operations are performed in memory and cleaned up after use
+
+## 👥 Contact
+- Telegram [@michalstefanow](https://t.me/mylord1_1)
+- Twitter [@michalstefanow](https://x.com/michalstefanow)
